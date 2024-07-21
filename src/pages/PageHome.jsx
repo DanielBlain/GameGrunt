@@ -1,9 +1,10 @@
-import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
-import { appTitle } from '../config/globals'
+import { useEffect, useState, useContext } from 'react'
+import { AppContext } from '../routers/AppRouter'
+import { appTitle } from '../global/globals'
 
-const PageHome = ({ navPages }) => {
+const PageHome = () => {
 
+    const { setUserName } = useContext(AppContext)
     const [count, setCount] = useState(0)
 
     useEffect(() => {
@@ -18,6 +19,10 @@ const PageHome = ({ navPages }) => {
         setCount(count+1)
     }
 
+    function setName() {
+        setUserName('POTATO SALAD')
+    }
+
     return (
         <main>
             <section>
@@ -30,6 +35,9 @@ const PageHome = ({ navPages }) => {
                         <span> {count} </span>
                         <button onClick={plus}>&#x2B;</button>
                     </p>
+                    <p>
+                        <button onClick={setName}>Click for name</button>
+                    </p>
                 </article>
                 <article>
                     <h2>Article 02</h2>
@@ -39,10 +47,6 @@ const PageHome = ({ navPages }) => {
         </main>
     )
     
-}
-
-PageHome.propTypes = {
-    navPages: PropTypes.array
 }
 
 export default PageHome

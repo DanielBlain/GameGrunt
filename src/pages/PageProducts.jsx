@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { appTitle } from '../config/globals'
+import { appTitle } from '../global/globals'
 
 const PageProducts = () => {
 
