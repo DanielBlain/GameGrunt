@@ -1,9 +1,9 @@
 // AppRouter
 // Development Components
-import { createContext, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 // Components
+import { GameContextProvider } from '../components/GameContext'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
@@ -15,14 +15,10 @@ import PageServices from '../pages/PageServices'
 import PageContact  from '../pages/PageContact'
 import PageNotFound from '../pages/PageNotFound'
 
-export const AppContext = createContext(null)
-
 function AppRouter() {    
 
-    const [userName, setUserName] = useState(null)
-
     return (
-        <AppContext.Provider value={{userName, setUserName}}>
+        <GameContextProvider>
             <BrowserRouter>
                 <div className="wrapper">
                     <Header />
@@ -40,7 +36,7 @@ function AppRouter() {
                     <Footer />
                 </div>
             </BrowserRouter>
-        </AppContext.Provider>
+        </GameContextProvider>
     )
 }
 

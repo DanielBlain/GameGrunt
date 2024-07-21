@@ -2,13 +2,13 @@ import PropTypes from 'prop-types'
 import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 
-import { AppContext } from '../routers/AppRouter'
+import { GameContext } from '../components/GameContext'
 import Nav from './Nav'
-import { appTitle } from '../global/globals'
+import { appTitle } from '../config/globals'
 
 const Header = () => {
 
-    const { userName } = useContext(AppContext)
+    const { userInfo } = useContext(GameContext)
     const [showNav, setShowNav] = useState(false)
 
     const toggleNav = () => {
@@ -30,7 +30,7 @@ const Header = () => {
 
     return (
         <header className={showNav ? 'show' : ''}>
-            <h1><Link to="/">{appTitle + ` ${userName}`}</Link></h1>
+            <h1><Link to="/">{appTitle + (userInfo && ` ${userInfo.name}`)}</Link></h1>
             {/**
              * HTML for the Hamburger icon modified from HTMl
              * found at this codepen:

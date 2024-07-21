@@ -1,10 +1,10 @@
 import { useEffect, useState, useContext } from 'react'
-import { AppContext } from '../routers/AppRouter'
-import { appTitle } from '../global/globals'
+import { GameContext } from '../components/GameContext'
+import { appTitle } from '../config/globals'
 
 const PageHome = () => {
 
-    const { setUserName } = useContext(AppContext)
+    const { setUserInfo } = useContext(GameContext)
     const [count, setCount] = useState(0)
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const PageHome = () => {
     }
 
     function setName() {
-        setUserName('POTATO SALAD')
+        setUserInfo({name: 'POTATO SALAD'})
     }
 
     return (

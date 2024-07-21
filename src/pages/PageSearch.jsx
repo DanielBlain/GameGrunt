@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { appTitle } from '../global/globals'
+import { appTitle } from '../config/globals'
 
 const PageSearch = () => {
 
