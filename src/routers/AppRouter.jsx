@@ -25,12 +25,13 @@ function AppRouter() {
                     <main>
                         <Routes>
                             <Route path='/' exact element={<PageHome />} />
-                                <Route path='/g' element={<PageHome />} />
+                            <Route path='/g' element={<PageHome />}>
+                                <Route path='/g/products' element={<PageProducts />}  />
+                                <Route path='/g/services' element={<PageServices />}  />
+                                <Route path='/g/contact'  element={<PageContact />}   />
+                            </Route>
                             <Route path='/search'   element={<PageSearch />}    />
                                 <Route path='/search/:movieID' element={<PageSearch />} />
-                            <Route path='/products' element={<PageProducts />}  />
-                            <Route path='/services' element={<PageServices />}  />
-                            <Route path='/contact'  element={<PageContact />}   />
                             <Route path='/notfound' element={<PageNotFound />}  />
                             <Route path='*'         element={<PageNotFound />}  />
                         </Routes>

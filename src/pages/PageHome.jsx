@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, Outlet } from 'react-router-dom'
 import { GameContext } from '../components/GameContext'
 import { appTitle } from '../config/globals'
 
@@ -25,6 +25,7 @@ const PageHome = () => {
                 setCurrGame(null)
                 navigate('/notfound')
             }
+            // else do nothing, user is seeking the homepage
         }
     }, [setCurrGame, findGame, gamekey])
 
@@ -59,6 +60,7 @@ const PageHome = () => {
                     </div>
                 </article>
             </section>
+            <Outlet />
         </main>
     )
     
