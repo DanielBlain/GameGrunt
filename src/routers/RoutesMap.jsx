@@ -12,10 +12,10 @@ const RoutesMap = () => {
 
     return (
         <Routes>
-            <Route path='/' exact element={<PageHome />} />
+            <Route key='home-null' path='/' exact element={<PageHome />} />
             {gamesRoutes()}
-            <Route path='/search' element={<PageSearch />} />
-            <Route path='*' element={<PageNotFound />} />
+            <Route key='search-null' path='/search' element={<PageSearch />} />
+            <Route key='notfound-null' path='*' element={<PageNotFound />} />
         </Routes>
     )
 }

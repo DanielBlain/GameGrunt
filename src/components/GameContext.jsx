@@ -21,10 +21,10 @@ export const GameContextProvider = ({ children }) => {
                 {gameList.map((gameData) => {
                     return (
                         <>
-                            <Route path={`/${gameData.key}`}            element={<PageHome />}      />
-                            <Route path={`/${gameData.key}/products`}   element={<PageProducts />}  />
-                            <Route path={`/${gameData.key}/services`}   element={<PageServices />}  />
-                            <Route path={`/${gameData.key}/contact`}    element={<PageContact />}   />
+                            <Route key={`/${gameData.key}-home`}        path={`/${gameData.key}`}            element={<PageHome />}      />
+                            <Route key={`/${gameData.key}-products`}    path={`/${gameData.key}/products`}   element={<PageProducts />}  />
+                            <Route key={`/${gameData.key}-services`}    path={`/${gameData.key}/services`}   element={<PageServices />}  />
+                            <Route key={`/${gameData.key}-contact`}     path={`/${gameData.key}/contact`}    element={<PageContact />}   />
                         </>                        
                     )
                 })}
@@ -48,4 +48,4 @@ export const GameContextProvider = ({ children }) => {
 
 GameContextProvider.propTypes = {
   children: PropTypes.element
-};
+}
