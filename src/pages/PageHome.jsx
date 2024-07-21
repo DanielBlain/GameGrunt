@@ -4,7 +4,7 @@ import { appTitle } from '../config/globals'
 
 const PageHome = () => {
 
-    const { setUserInfo } = useContext(GameContext)
+    const { setCurrGame, findGame } = useContext(GameContext)
     const [count, setCount] = useState(0)
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const PageHome = () => {
     }
 
     function setName() {
-        setUserInfo({name: 'POTATO SALAD'})
+        setCurrGame(findGame('viticulture'))
     }
 
     return (

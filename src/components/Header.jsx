@@ -7,8 +7,7 @@ import Nav from './Nav'
 import { appTitle } from '../config/globals'
 
 const Header = () => {
-
-    const { userInfo } = useContext(GameContext)
+    const { currGame } = useContext(GameContext)
     const [showNav, setShowNav] = useState(false)
 
     const toggleNav = () => {
@@ -30,7 +29,7 @@ const Header = () => {
 
     return (
         <header className={showNav ? 'show' : ''}>
-            <h1><Link to="/">{appTitle + (userInfo && ` ${userInfo.name}`)}</Link></h1>
+            <h1><Link to="/">{appTitle + (currGame && ` ${currGame.title}`)}</Link></h1>
             {/**
              * HTML for the Hamburger icon modified from HTMl
              * found at this codepen:
