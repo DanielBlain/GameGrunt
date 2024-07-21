@@ -1,15 +1,31 @@
-import { useEffect, useState, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { useLocation } from 'react-router-dom'
 import { GameContext } from '../components/GameContext'
 import { appTitle } from '../config/globals'
 
 const PageHome = () => {
 
-    const { setCurrGame, findGame } = useContext(GameContext)
+    const { currGame, setCurrGame, findGame } = useContext(GameContext)
+    const getQueryParams = (search) => new URLSearchParams(search)
+    const queryParams = getQueryParams(useLocation().search)
+    const gamekey = queryParams.get('key')
+    const expansionkey = queryParams.get('expansion')
+
     const [count, setCount] = useState(0)
 
     useEffect(() => {
-        document.title = `${appTitle} - Home`
-    }, [])
+        const chosenGame = findGame(gamekey)
+        if (chosenGame) {
+            setCurrGame(chosenGame)
+            document.title = chosenGame.title
+        }
+        else {
+            if (!gamekey) {
+                setCurrGame(null)
+                document.title = appTitle
+            }
+        }
+    }, [setCurrGame, findGame, gamekey])
 
     function minus() {
         setCount(count-1)
@@ -19,14 +35,10 @@ const PageHome = () => {
         setCount(count+1)
     }
 
-    function setName() {
-        setCurrGame(findGame('viticulture'))
-    }
-
     return (
         <main>
             <section>
-                <h2>Home Page</h2>
+                <h2>Home Page{currGame && ` - ${currGame.title}`}</h2>
                 <article>
                     <h2>Article 01</h2>
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit quas modi cupiditate iusto? Placeat, molestias expedita tempora error cumque similique amet natus eum nesciunt doloribus totam, incidunt ducimus dolores optio!</p>
@@ -35,13 +47,15 @@ const PageHome = () => {
                         <span> {count} </span>
                         <button onClick={plus}>&#x2B;</button>
                     </p>
-                    <p>
-                        <button onClick={setName}>Click for name</button>
-                    </p>
                 </article>
                 <article>
                     <h2>Article 02</h2>
                     <p>Accusamus tempora assumenda laborum aliquam totam, perferendis optio delectus porro molestias odio, nostrum quidem maiores, illo impedit quod dignissimos ut eligendi. Veritatis quis ea est nisi ad accusamus et ullam.</p>
+                    <div>
+                        <h3>Game Page</h3>
+                        <p>Game key: {gamekey}</p>
+                        <p>Expansion key: {expansionkey}</p>
+                    </div>
                 </article>
             </section>
         </main>

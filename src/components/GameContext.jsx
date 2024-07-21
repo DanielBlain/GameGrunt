@@ -143,8 +143,7 @@ export const GameContext = createContext(null)
 export const GameContextProvider = ({ children }) => {
     const [currGame, setCurrGame] = useState(null)
 
-    const findGame = (gamekey) => 
-        gameList.find((game) => game.key === gamekey)
+    const findGame = (gamekey) => gameList.find((game) => game.key === gamekey)
 
     const value = {
         currGame,
