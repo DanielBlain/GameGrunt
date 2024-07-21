@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { GameContext } from '../components/GameContext'
 import { appTitle } from '../config/globals'
 
@@ -10,6 +10,7 @@ const PageHome = () => {
     const queryParams = getQueryParams(useLocation().search)
     const gamekey = queryParams.get('key')
     const expansionkey = queryParams.get('expansion')
+    const navigate = useNavigate()
 
     const [count, setCount] = useState(0)
 
@@ -20,9 +21,9 @@ const PageHome = () => {
             document.title = chosenGame.title
         }
         else {
-            if (!gamekey) {
+            if (gamekey) {
                 setCurrGame(null)
-                document.title = appTitle
+                navigate('/notfound')
             }
         }
     }, [setCurrGame, findGame, gamekey])
@@ -38,7 +39,7 @@ const PageHome = () => {
     return (
         <main>
             <section>
-                <h2>Home Page{currGame && ` - ${currGame.title}`}</h2>
+                <h2>{appTitle}{currGame && ` - ${currGame.title}`}</h2>
                 <article>
                     <h2>Article 01</h2>
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit quas modi cupiditate iusto? Placeat, molestias expedita tempora error cumque similique amet natus eum nesciunt doloribus totam, incidunt ducimus dolores optio!</p>
