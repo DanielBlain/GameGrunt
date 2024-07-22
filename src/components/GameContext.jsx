@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types'
-import { createContext, useState } from 'react'
+import { createContext } from 'react'
 import { Route } from 'react-router-dom'
 
 import { gameList } from '../config/globals'
+import { useGameData } from '../customhooks/useGameData'
 import PageHome     from '../pages/PageHome'
 import PageProducts from '../pages/PageProducts'
 import PageServices from '../pages/PageServices'
@@ -11,31 +12,49 @@ import PageContact  from '../pages/PageContact'
 export const GameContext = createContext(null)
 
 export const GameContextProvider = ({ children }) => {
-    const [currGame, setCurrGame] = useState(null)
-
-    const findGame = (gamekey) => gameList.find((game) => game.key === gamekey)
+    const [currGameInfo] = useGameData(gameList, '/')
 
     function gamesRoutes() {
-        return (
-            <>
-                {gameList.map((gameData) => {
-                    return (
-                        <>
-                            <Route key={`/${gameData.key}-home`}        path={`/${gameData.key}`}            element={<PageHome />}      />
-                            <Route key={`/${gameData.key}-products`}    path={`/${gameData.key}/products`}   element={<PageProducts />}  />
-                            <Route key={`/${gameData.key}-services`}    path={`/${gameData.key}/services`}   element={<PageServices />}  />
-                            <Route key={`/${gameData.key}-contact`}     path={`/${gameData.key}/contact`}    element={<PageContact />}   />
-                        </>                        
-                    )
-                })}
-            </>
-        )
+        if (currGameInfo) {
+            return (
+                <>
+                    <Route
+                        key={`/${currGameInfo.key}-home`}
+                        path={`/${currGameInfo.key}/home`}
+                        element={<PageHome />}
+                    />
+                    <Route
+                        key={`/${currGameInfo.key}-products`}
+                        path={`/${currGameInfo.key}/products`}
+                        element={<PageProducts />}
+                    />
+                    <Route
+                        key={`/${currGameInfo.key}-services`}
+                        path={`/${currGameInfo.key}/services`}
+                        element={<PageServices />}
+                    />
+                    <Route
+                        key={`/${currGameInfo.key}-contact`}
+                        path={`/${currGameInfo.key}/contact`}
+                        element={<PageContact />}
+                    />
+                </>
+            )
+        }
+        else {
+            return (
+                <>
+                    <Route
+                        path={`/`}
+                        element={<PageHome />}
+                    />
+                </>
+            )
+        }
     }
 
     const value = {
-        currGame,
-        setCurrGame,
-        findGame,
+        currGameInfo,
         gamesRoutes
     }
 
