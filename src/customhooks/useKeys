@@ -15,27 +15,26 @@ const findMatch = (list, queryKey) => list.find(
  * Returns the key of a selected object, and a function
  * returning the selected object
  * 
- * The array ought contain unique keys; otherwise, only
+ * The array ought to contain unique keys; otherwise, only
  * the object with the first matching key can ever be
  * selected
+ * 
  * */
 export function useKeys(objectList, initialKey) {
 
+    const masterList = objectList
+    const [selected, setSelected] = useState(null)
     const [key, setKey] = useState(initialKey)
-    const initialMatch = findMatch(objectList, initialKey)
-    const [selected, setSelected] = useState(initialMatch ? objectList[initialKey].key : null)
-    
-    useEffect(() => {
-        const master = {
-            list: objectList,
-            selectedKey: initialKey
-        }
-    
-        let updatedMatch = findMatch(master.list, key)
-        if (updatedMatch) {
-            setSelected(updatedMatch)
-        }
-    }, [key, objectList, initialKey])
 
-    return [key, setKey, selected]
+    useEffect(() => {
+        let match = findMatch(masterList, key)
+        if (match) {
+            setSelected(match)
+        } else {
+            setKey(null)
+            setSelected(null)
+        }
+    }, [masterList, key])
+
+    return [key, setKey, selected];
 }

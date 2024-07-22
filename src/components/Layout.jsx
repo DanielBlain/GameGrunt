@@ -8,13 +8,13 @@ import Footer from './Footer'
 
 const Layout = ({ children }) => {
     const currURL = useLocation()
-    const { key, setKey } = useContext( GameContext )
+    const { key, setKey, currGame } = useContext( GameContext )
  
     useEffect(() => {
         console.log('prevkey ' + key)
-        console.log('currpath ' + currURL.pathname)
+        console.log('currGame ' + currGame)
         setKey(currURL.pathname)
-    }, [key, setKey, currURL.pathname])
+    }, [key, setKey, currGame, currURL.pathname])
     
     return (
         <div className="wrapper">
