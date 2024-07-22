@@ -1,0 +1,41 @@
+import { useState, useEffect } from 'react'
+
+const findMatch = (list, queryKey) => list.find(
+        (queryObject) => queryObject.key === queryKey
+    )
+
+/*****
+ * 
+ * useKeys
+ * 
+ * If initialKey (string) contains the key of an object
+ * in the objectList (array), that object becomes the
+ * selected object
+ * 
+ * Returns the key of a selected object, and a function
+ * returning the selected object
+ * 
+ * The array ought contain unique keys; otherwise, only
+ * the object with the first matching key can ever be
+ * selected
+ * */
+export function useKeys(objectList, initialKey) {
+
+    const [key, setKey] = useState(initialKey)
+    const initialMatch = findMatch(objectList, initialKey)
+    const [selected, setSelected] = useState(initialMatch ? objectList[initialKey].key : null)
+    
+    useEffect(() => {
+        const master = {
+            list: objectList,
+            selectedKey: initialKey
+        }
+    
+        let updatedMatch = findMatch(master.list, key)
+        if (updatedMatch) {
+            setSelected(updatedMatch)
+        }
+    }, [key, objectList, initialKey])
+
+    return [key, setKey, selected]
+}

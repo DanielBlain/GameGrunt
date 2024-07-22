@@ -1,4 +1,3 @@
-// import { useContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import PageHome from '../pages/PageHome'
@@ -9,7 +8,7 @@ const RoutesMap = () => {
 
     return (
         <Routes>
-            <Route path='/' element={<PageHome />} />
+            <Route path='/' exact element={<PageHome />} />
             <Route path='/search' element={<PageSearch />} />
             <Route path='*' element={<PageNotFound />} />
         </Routes>

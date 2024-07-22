@@ -2,20 +2,23 @@
 // Development Components
 import { BrowserRouter } from 'react-router-dom'
 
-// Routing component
+// Components
+import { GameContextProvider } from '../customhooks/useGameContext.jsx'
+import Layout from '../components/Layout'
 import RoutesMap from './RoutesMap'
 
-// Components
-import Layout from '../components/Layout'
-
 function AppRouter() {
+
     return (
         <BrowserRouter>
-            <Layout>
-                <RoutesMap />
-            </Layout>
+            <GameContextProvider>
+                <Layout>
+                    <RoutesMap />
+                </Layout>
+            </GameContextProvider>
         </BrowserRouter>
     )
+
 }
 
 export default AppRouter

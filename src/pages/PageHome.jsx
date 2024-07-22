@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import { appTitle } from '../config/globals'
 
+
 const PageHome = () => {
 
     const navigate = useNavigate()
-    // const { currGameInfo } = useContext(GameContext)
 
     function minus() {
         navigate('/wingspan')
