@@ -6,18 +6,14 @@ import { BrowserRouter } from 'react-router-dom'
 import RoutesMap from './RoutesMap'
 
 // Components
-import { GameContextProvider } from '../components/GameContext'
 import Layout from '../components/Layout'
 
-function AppRouter() {    
-
+function AppRouter() {
     return (
         <BrowserRouter>
-            <GameContextProvider>
-                <Layout>
-                    <RoutesMap />
-                </Layout>
-            </GameContextProvider>
+            <Layout>
+                <RoutesMap />
+            </Layout>
         </BrowserRouter>
     )
 }
