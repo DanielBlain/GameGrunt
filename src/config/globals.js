@@ -6,7 +6,7 @@ export const appTitle = 'TestApp';
     title: string, the game's title for headers, lists, and navigation tabs
     style: filepath (string), the game's specific CSS file
     expansions: Array[], expansions for this game
-    }
+
     {
         key: '',
         title: '',
@@ -16,13 +16,19 @@ export const appTitle = 'TestApp';
 */
 export const gameList = [
     {
+        key: '7-wonders',
+        title: '7 Wonders',
+        style: '',
+        expansions: Array()
+    },
+    {
         key: 'arnak',
         title: 'Arnak',
         style: '',
         expansions: Array()
     },
     {
-        key: 'alien-frontiers',
+        key: 'alienFrontiers',
         title: 'Alien Frontiers',
         style: '',
         expansions: Array()
@@ -36,6 +42,12 @@ export const gameList = [
     {
         key: 'brass-birmingham',
         title: 'Brass Birmingham',
+        style: '',
+        expansions: Array()
+    },
+    {
+        key: 'broom-service',
+        title: 'Broom Service',
         style: '',
         expansions: Array()
     },
@@ -134,5 +146,5 @@ export const gameList = [
         title: 'Wingspan',
         style: '',
         expansions: Array()
-    },
+    }
 ]
