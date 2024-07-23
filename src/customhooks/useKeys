@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 const findMatch = (list, queryKey) => list.find(
-        (queryObject) => queryObject.key === queryKey
-    )
+    (queryObject) => queryObject.key === queryKey
+)
 
 /*****
  * 
@@ -15,26 +15,14 @@ const findMatch = (list, queryKey) => list.find(
  * Returns the key of a selected object, and a function
  * returning the selected object
  * 
- * The array ought to contain unique keys; otherwise, only
- * the object with the first matching key can ever be
- * selected
+ * The array ought to contain unique keys; otherwise,
+ * only the object with the first matching key can
+ * ever be selected
  * 
  * */
-export function useKeys(objectList, initialKey) {
+export function useKeys(objectList) {
 
-    const masterList = objectList
-    const [selected, setSelected] = useState(null)
-    const [key, setKey] = useState(initialKey)
+    const [list, setList] = useState([...objectList])
 
-    useEffect(() => {
-        let match = findMatch(masterList, key)
-        if (match) {
-            setSelected(match)
-        } else {
-            setKey(null)
-            setSelected(null)
-        }
-    }, [masterList, key])
-
-    return [key, setKey, selected];
+    return [list, setList]
 }

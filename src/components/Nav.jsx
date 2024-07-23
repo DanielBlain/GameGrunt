@@ -14,11 +14,11 @@ const Nav = ({ handleShowHideNav }) => {
     return (
         <nav className="main-nav" onClick={closeNav}>
             <ul>
-                {/* <li><NavLink to={currGame ? currGame.title+'/' : '/'}>Home</NavLink></li> */}
-                {/* {currGame && `<li><NavLink to={currGame.title+'/search'}>Search</NavLink></li>`}
-                {currGame && `<li><NavLink to={currGame.title+'/products'}>Products</NavLink></li>`}
-                {currGame && `<li><NavLink to={currGame.title+'/services'}>Services</NavLink></li>`}
-                {currGame && `<li><NavLink to={currGame.title+'/contact'}>Contact</NavLink></li>`} */}
+                <li><NavLink to='/'>Home</NavLink></li>
+                <li><NavLink to='/search'>Search</NavLink></li>
+                <li><NavLink to='/products'>Products</NavLink></li>
+                <li><NavLink to='/services'>Services</NavLink></li>
+                <li><NavLink to='/contact'>Contact</NavLink></li>
             </ul>
         </nav>
     );
