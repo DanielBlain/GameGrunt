@@ -7,14 +7,15 @@ import { useSelected } from '../customhooks/useSelected.jsx'
 
 const GameContext = ({ children }) => {
 
-    const [ selected, setKey ] = useSelected(gameList, 0)
+    const [ selected, setKey ] = useSelected(gameList, 'arnak')
 
     return (
         <div>
             <h2 style={{color: 'red'}}>GameContext!!{selected && `Title-"${selected.title}" Key="${selected.key}"`}</h2>
-            <button onClick={()=>{setKey(0)}}>setKey(0)</button>
-            <button onClick={()=>{setKey(5)}}>setKey(5)</button>
-            <button onClick={()=>{setKey(11)}}>setKey(11)</button>
+            <p>initial game: arnak</p>
+            <button onClick={()=>{setKey('pandemic')}}>setKey(pandemic)</button>
+            <button onClick={()=>{setKey('wingspan')}}>setKey(wingspan)</button>
+            <button onClick={()=>{setKey('ticket-to-ride')}}>setKey(ticket to ride)</button>
             { children }
         </div>
     )
