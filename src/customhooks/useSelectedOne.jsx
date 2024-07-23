@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react'
  *      list: (array) of objects, each with a key (string) field
  *      initial: (string) a key for the first object to
  *          be selected by default
+ *      orZero: (boolean) if true, no objects may be selected, in
+ *          which case the "selected object" is null
  * 
  * returns: [ selected object in list,
  *              setter func to select a new object by key ]
@@ -18,7 +20,7 @@ import { useState, useEffect } from 'react'
  * ever be selected
  * 
  * */
-export function useSelected(list, initial) {
+export function useSelectedOne(list, initial, orZero=false) {
 
     // Return the initial index if the initial key is
     // found in the list; otherwise, return -1
@@ -32,14 +34,15 @@ export function useSelected(list, initial) {
     }, [list, initial])
 
     const setKey = (key) => {
-        const newIndex = list.findIndex(queried => key.includes(queried.key))
+        let newIndex = list.findIndex(queried => queried.key === key)
+        if (!orZero && newIndex === -1) {
+            newIndex = 0
+        }
         setSelectedIndex(newIndex)
-        if (newIndex === -1) {
+        if (newIndex === -1 && !orZero) {
             console.warn(`Invalid key: ${key}. Please review the list of keys and select one.`)
         }
-        else {
-            console.log(list[newIndex])
-        }
+        console.log(list[newIndex])
     }
 
     return [

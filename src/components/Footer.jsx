@@ -10,6 +10,6 @@ const Footer = () => (
                 /> &copy; {getYear()} Dan J Blain
         </p>
     </footer>
-);
+)
 
-export default Footer;
+export default Footer

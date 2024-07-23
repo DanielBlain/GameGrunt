@@ -3,11 +3,11 @@ import { useState } from 'react'
 
 import { gameList } from '../config/globals'
 
-import { useSelected } from '../customhooks/useSelected.jsx'
+import { useSelectedOne } from '../customhooks/useSelectedOne'
 
 const GameContext = ({ children }) => {
 
-    const [ selected, setKey ] = useSelected(gameList, 'arnak')
+    const [ selected, setKey ] = useSelectedOne(gameList, 'arnak')
 
     return (
         <div>
@@ -16,6 +16,7 @@ const GameContext = ({ children }) => {
             <button onClick={()=>{setKey('pandemic')}}>setKey(pandemic)</button>
             <button onClick={()=>{setKey('wingspan')}}>setKey(wingspan)</button>
             <button onClick={()=>{setKey('ticket-to-ride')}}>setKey(ticket to ride)</button>
+            <button onClick={()=>{setKey('garbage')}}>setKey(garbage)</button>
             { children }
         </div>
     )
