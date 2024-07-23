@@ -11,36 +11,34 @@ import { useState, useEffect } from 'react'
  *              setter func to select a new object by key ]
  * 
  * If initial contains the key of an object
- * in the list, that object is selected
+ * in the list, that object is selected right away
  * 
- * The array ought to contain unique keys; otherwise,
+ * NOTE: list ought to contain unique keys; otherwise,
  * only the object with the first matching key can
  * ever be selected
  * 
  * */
 export function useSelected(list, initial) {
 
-    // Finds the index of the object with the given key
-    function findIndexByKey(key) {
-        return list.findIndex(item => key.includes(item.key))
-    }
-
     // Return the initial index if the initial key is
     // found in the list; otherwise, return -1
     const [selectedIndex, setSelectedIndex] =
-        useState(() => findIndexByKey(initial))
+        useState(() => list.findIndex(queried => initial.includes(queried.key)))
 
     // Choose a new selected object when the initial
     // key or list changes
     useEffect(() => {
-        setSelectedIndex(findIndexByKey(initial))
+        setSelectedIndex(list.findIndex(queried => initial.includes(queried.key)))
     }, [list, initial])
 
     const setKey = (key) => {
-        const newIndex = findIndexByKey(key)
+        const newIndex = list.findIndex(queried => key.includes(queried.key))
         setSelectedIndex(newIndex)
         if (newIndex === -1) {
             console.warn(`Invalid key: ${key}. Please review the list of keys and select one.`)
+        }
+        else {
+            console.log(list[newIndex])
         }
     }
 
